@@ -17,6 +17,5 @@ M.getImage = function (cfg)
   }
   print('asking kitty to set bg image')
   vim.fn.system({ "kitty", "@", "set-background-image", img_path })
-
 end
 return M

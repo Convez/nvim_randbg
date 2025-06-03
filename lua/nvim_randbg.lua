@@ -8,6 +8,12 @@ M.setup = function (cfg)
   
   local imgHandler = require('image')
   imgHandler.getImage(newCfg)
+  vim.api.nvim_create_autocmd('VimLeave', {
+    pattern = '*',
+    callback = function()
+      vim.fn.system({ "kitty", "@", "set-background-image", "none"})
+    end
+  })
 
 end
 
