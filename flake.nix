@@ -11,14 +11,18 @@
         pkgs = import nixpkgs { inherit system; };
       });
       devShells = forEachArch ({ pkgs, system }: {
-        default = pkgs.mkShell {
+        default = pkgs.mkShellNoCC {
           inputsFrom = [nix-linguist.devShells.${system}.default];
           packages = with pkgs; [
             lua-language-server
             lua5_1
             nixd
             luarocks
+            openssl
+            gcc
           ];
+          OPENSSL_DIR = "${pkgs.openssl.dev}";
+          OPENSSL_LIBDIR = pkgs.lib.makeLibraryPath [pkgs.openssl];
         };
       });
   in

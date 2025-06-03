@@ -1,5 +1,24 @@
 commands = {}
 dependencies = {
+   luasec = {
+      ["1.3.2-1"] = {
+         {
+            constraints = {
+               {
+                  op = ">=",
+                  version = {
+                     5, 1, string = "5.1"
+                  }
+               }
+            },
+            name = "lua"
+         },
+         {
+            constraints = {},
+            name = "luasocket"
+         }
+      }
+   },
    luasocket = {
       ["3.1.0-1"] = {
          {
@@ -55,9 +74,30 @@ modules = {
    },
    ["socket.url"] = {
       "luasocket/3.1.0-1"
+   },
+   ssl = {
+      "luasec/1.3.2-1"
+   },
+   ["ssl.https"] = {
+      "luasec/1.3.2-1"
    }
 }
 repository = {
+   luasec = {
+      ["1.3.2-1"] = {
+         {
+            arch = "installed",
+            commands = {},
+            dependencies = {
+               luasocket = "3.1.0-1"
+            },
+            modules = {
+               ssl = "ssl.lua",
+               ["ssl.https"] = "ssl/https.lua"
+            }
+         }
+      }
+   },
    luasocket = {
       ["3.1.0-1"] = {
          {
